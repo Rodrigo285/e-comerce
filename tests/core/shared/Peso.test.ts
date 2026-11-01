@@ -37,3 +37,7 @@ test("Deve retornar false para pesos diferente", () => {
   const peso2 = Peso.create(1000);
   expect(peso1.igual(peso2)).toBe(false);
 });
+
+test("Deve rejeitar peso que não seja um número", () => {
+  expect(() => Peso.create("1000" as any)).toThrow(Erros.PESO_INVALIDO);
+});
