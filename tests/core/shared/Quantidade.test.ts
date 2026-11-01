@@ -1,3 +1,4 @@
+import Erros from "../../../src/constants/Erros";
 import Quantidade from "../../../src/core/shared/Quantidade";
 
 test("Deve retornar uma quantidade valida", () => {
@@ -6,7 +7,7 @@ test("Deve retornar uma quantidade valida", () => {
 });
 
 test("Deve lancar erro para quantidade negativa", () => {
-  expect(() => Quantidade.create(-1)).toThrow("quantidade invalida");
+  expect(() => Quantidade.create(-1)).toThrow(Erros.QUANTIDADE_INVALIDA);
 });
 
 test("Deve somar duas quantidades", () => {

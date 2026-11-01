@@ -1,8 +1,10 @@
+import Erros from "../../constants/Erros";
+
 export default class Quantidade {
   readonly valor: number;
 
   private constructor(valor: number) {
-    if (!Quantidade.isValido(valor)) throw new Error("quantidade invalida");
+    if (!Quantidade.isValido(valor)) throw new Error(Erros.QUANTIDADE_INVALIDA);
     this.valor = valor;
   }
 
