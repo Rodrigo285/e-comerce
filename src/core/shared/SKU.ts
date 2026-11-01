@@ -5,7 +5,7 @@ export default class SKU {
   readonly valor: string;
   static readonly REGEX = /^[A-Z]{3}-\d{3}-[A-Z]{2}$/;
 
-  constructor(valor: string) {
+  private constructor(valor: string) {
     const skuNormalizado = valor.trim();
     const erro = SKU.isValido(skuNormalizado);
     if (erro) {
