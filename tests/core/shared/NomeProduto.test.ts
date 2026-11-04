@@ -1,6 +1,5 @@
 import NomeProduto from "../../../src/core/shared/NomeProduto";
 import Erros from "../../../src/constants/Erros";
-import Validador from "../../../src/utils/Validador";
 
 test("Deve criar um nome de produto valido", () => {
   const nome = NomeProduto.create("camiseta azul");
