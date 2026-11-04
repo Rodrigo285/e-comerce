@@ -1,3 +1,5 @@
+import { stringify } from "node:querystring";
+
 export default class Validador {
   static naoNulo(valor: any, erro: string): null | string {
     return valor !== null && valor !== undefined ? null : erro;
@@ -11,23 +13,28 @@ export default class Validador {
     return valor?.trim() !== "" ? null : erro;
   }
 
-  static tamanhoMinimo(
+  static tamanhoMaiorQue(
     valor: string,
-    limite: number,
+    tamanhoMinimo: number,
     erro: string,
   ): null | string {
-    return valor.length >= limite ? null : erro;
+    return valor.length >= tamanhoMinimo ? null : erro;
   }
 
-  static tamanhoMaximo(
+  static tamanhoMenorQue(
     valor: string,
-    limite: number,
+    tamanhoMaximo: number,
     erro: string,
   ): null | string {
-    return valor.length <= limite ? null : erro;
+    return valor.length <= tamanhoMaximo ? null : erro;
   }
 
   static regex(valor: string, regex: RegExp, erro: string): null | string {
     return regex.test(valor) ? null : erro;
+  }
+
+  static combinar(...erros: (string | null)[]): string[] | null {
+    const errosFiltrados = erros.filter((erro) => erro !== null) as string[];
+    return errosFiltrados.length > 0 ? errosFiltrados : null;
   }
 }

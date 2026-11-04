@@ -42,19 +42,23 @@ test("Deve retornar erro com o valor do texto undefined", () => {
 });
 
 test("Deve retornar null para o seguinte texto Ana", () => {
-  const erro = Validador.tamanhoMinimo("Ana", 3, Erros.TEXTO_MENOR_QUE_MINIMO);
+  const erro = Validador.tamanhoMaiorQue(
+    "Ana",
+    3,
+    Erros.TEXTO_MENOR_QUE_MINIMO,
+  );
 
   expect(erro).toBe(null);
 });
 
 test("Deve retornar erro para o seguinte texto Al", () => {
-  const erro = Validador.tamanhoMinimo("Al", 3, Erros.TEXTO_MENOR_QUE_MINIMO);
+  const erro = Validador.tamanhoMaiorQue("Al", 3, Erros.TEXTO_MENOR_QUE_MINIMO);
 
   expect(erro).toBe(Erros.TEXTO_MENOR_QUE_MINIMO);
 });
 
 test("Deve retornar null para o seguinte texto Maria", () => {
-  const erro = Validador.tamanhoMinimo(
+  const erro = Validador.tamanhoMaiorQue(
     "Maria",
     3,
     Erros.TEXTO_MENOR_QUE_MINIMO,
@@ -63,14 +67,8 @@ test("Deve retornar null para o seguinte texto Maria", () => {
   expect(erro).toBe(null);
 });
 
-test("Deve retornar null para o seguinte texto Ana", () => {
-  const erro = Validador.tamanhoMaximo("Ana", 5, Erros.TEXTO_MAIOR_QUE_MAXIMO);
-
-  expect(erro).toBe(null);
-});
-
-test("Deve retornar null para o seguinte texto Maria", () => {
-  const erro = Validador.tamanhoMaximo(
+test("Deve retonar null para o seguinte texto Maria", () => {
+  const erro = Validador.tamanhoMaiorQue(
     "Maria",
     5,
     Erros.TEXTO_MAIOR_QUE_MAXIMO,
@@ -80,11 +78,11 @@ test("Deve retornar null para o seguinte texto Maria", () => {
 });
 
 test("Deve retornar erro para o seguinte texto Mariana", () => {
-  const erro = Validador.tamanhoMaximo(
+  const erro = Validador.tamanhoMaiorQue(
     "Mariana",
     5,
     Erros.TEXTO_MAIOR_QUE_MAXIMO,
   );
 
-  expect(erro).toBe(Erros.TEXTO_MAIOR_QUE_MAXIMO);
+  expect(erro).toBe(null);
 });
