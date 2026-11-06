@@ -6,7 +6,7 @@ describe("Produto", () => {
       sku: "NOT-001-CZ",
       nomeProduto: "Notebook",
       preco: 3500,
-      peso: 2,
+      peso: 2.5,
       dimensoes: {
         altura: 30,
         largura: 40,

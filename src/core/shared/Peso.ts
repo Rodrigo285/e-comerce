@@ -15,7 +15,6 @@ export default class Peso {
   static isValido(valor: number): boolean {
     if (typeof valor !== "number") return false;
     if (!Number.isFinite(valor)) return false;
-    if (!Number.isInteger(valor)) return false;
     if (valor <= 0) return false;
 
     return true;

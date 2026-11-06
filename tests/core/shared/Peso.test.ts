@@ -10,8 +10,9 @@ test("Deve lancar erro ao tentar criar um peso invalido", () => {
   expect(() => Peso.create(0)).toThrow(Erros.PESO_INVALIDO);
 });
 
-test("Deve lancar erro ao tentar criar um peso decimal", () => {
-  expect(() => Peso.create(1.34)).toThrow(Erros.PESO_INVALIDO);
+test("Deve criar um peso decimal", () => {
+  const peso1 = Peso.create(1.34);
+  expect(peso1.valor).toBe(1.34);
 });
 
 test("Deve lancar erro ao tentar criar um peso com NaN", () => {
