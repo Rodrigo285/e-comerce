@@ -125,8 +125,32 @@ describe("Produto", () => {
     const produto1 = Produto.create({ ...props1, id: id.valor });
     const produto2 = Produto.create({ ...props2, id: id.valor });
 
-    console.log(produto1, produto2);
-
     expect(produto1.igual(produto2)).toBe(true);
+  });
+
+  test("Deve criar um clone do produto com novo valor", () => {
+    const props1 = {
+      sku: "NOT-002-CZ",
+      nomeProduto: "Notebook",
+      preco: 5500,
+      peso: 2.5,
+      dimensoes: {
+        altura: 30,
+        largura: 40,
+        comprimento: 20,
+      },
+    };
+
+    const produto1 = Produto.create(props1);
+    const produto2 = produto1.clone({
+      ...props1,
+      preco: 6700,
+    });
+
+    console.log(produto1, produto2);
+    expect(produto2).toBeInstanceOf(Produto);
+    expect(produto1.preco.valor).toBe(5500);
+    expect(produto2.preco.valor).toBe(6700);
+    expect(produto2.id.diferente(produto1.id)).toBe(false);
   });
 });

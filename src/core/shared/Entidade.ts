@@ -20,15 +20,13 @@ export default abstract class Entidade<Tipo, Props extends EntidadeProps> {
     return this.id.diferente(outraEntidade.id);
   }
 
-  clone(novaProps: Props, ...args: any[]): Tipo{
-    return(this.constructor as any)(
+  clone(novaProps: Props, ...args: any[]): Tipo {
+    return new (this.constructor as any)(
       {
         ...this.props,
-        ...novaProps
+        ...novaProps,
       },
-      ...args
-    ),
-
-    }
+      ...args,
+    );
   }
-
+}
