@@ -147,7 +147,6 @@ describe("Produto", () => {
       preco: 6700,
     });
 
-    console.log(produto1, produto2);
     expect(produto2).toBeInstanceOf(Produto);
     expect(produto1.preco.valor).toBe(5500);
     expect(produto2.preco.valor).toBe(6700);

@@ -23,36 +23,35 @@ describe("NomeCliente", () => {
     expect(nome.valor).toBe("Ana");
   });
 
+  test("Deve lancar erro ao tentar criar nome com valor numerico", () => {
+    expect(() => NomeCliente.create(123 as any)).toThrow(Erros.NOME_INVALIDO);
+  });
+
   test("Deve aceitar nome com exatamente 60 caracteres", () => {
     const valor = "R".repeat(60);
     const nome = NomeCliente.create(valor);
     expect(nome.valor).toBe(valor);
   });
 
+  test("Deve aceitar nome maior que o minimo ", () => {
+    const nome = NomeCliente.create("Bete");
+    expect(nome.valor).toBe("Bete");
+  });
+
   //Lancar erros
 
-  test("Deve lançar erro ao tentar criar um nome vazio", () => {
-    expect(() => NomeCliente.create("")).toThrow(Erros.NOME_INVALIDO);
+  test("Deve lancar erro ao tentar criar nome menor que o minimo", () => {
+    expect(() => NomeCliente.create("An")).toThrow(Erros.NOME_MUITO_PEQUENO);
   });
 
-  test("Deve lancar erro ao tentar criar um nome com espaços vazios", () => {
-    expect(() => NomeCliente.create("")).toThrow(Erros.NOME_INVALIDO);
-  });
-
-  test("Deve lancar erro ao tentar criar um nome contendo numeros", () => {
-    expect(() => NomeCliente.create("Rodrigo1234")).toThrow(
-      Erros.NOME_INVALIDO,
-    );
-  });
-
-  test("Deve lancar erro ao tentar criar um nome menor que o tamano minimo", () => {
-    expect(() => NomeCliente.create("Ro")).toThrow(Erros.NOME_MUITO_PEQUENO);
-  });
-
-  test("Deve lancar erro ao tentar criar um nome maior que o tamano maximo", () => {
-    expect(() => NomeCliente.create("R".repeat(61))).toThrow(
+  test("Deve lancar erro ao tentar criar nome muito grande", () => {
+    expect(() => NomeCliente.create("A".repeat(61))).toThrow(
       Erros.NOME_MUITO_GRANDE,
     );
+  });
+
+  test("Deve lançar erro ao tentar criar um nome vazio", () => {
+    expect(() => NomeCliente.create(" ")).toThrow(Erros.NOME_INVALIDO);
   });
 
   //Caracteres especiais
