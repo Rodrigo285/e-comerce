@@ -28,7 +28,6 @@ describe("Cpf", () => {
   test("Deve retornar um cpf formatado", () => {
     const cpf = CPF.create("21802201890");
     expect(cpf.formatado).toBe("218.022.018-90");
-    console.log(cpf.formatado);
   });
 
   test("Deve lançar erro ao tentar criar CPF sem informar valor", () => {
