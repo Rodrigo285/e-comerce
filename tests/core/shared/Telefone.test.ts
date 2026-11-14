@@ -27,4 +27,19 @@ describe("Telefone", () => {
   test("Deve verificar se o ddd nao existe na lista", () => {
     expect(() => Telefone.create("20 3324-3256")).toThrow(Erros.TELEFONE_INVALIDO);
   });
+
+  test("Deve retornar o ddd do telefone informado", () => {
+    const tel = Telefone.create("17 3323-1234");
+    expect(tel.DDD).toBe("17");
+  });
+
+  test("Deve retornar o numero do telefone informado", () => {
+    const tel = Telefone.create("17 3323-1234");
+    expect(tel.numeroFormatado).toBe("17 3323-1234");
+  });
+
+  test("Deve retornar o celular informado", () => {
+    const cel = Telefone.create("17 98107-1234");
+    expect(cel.numeroFormatado).toBe("17 98107-1234");
+  });
 });

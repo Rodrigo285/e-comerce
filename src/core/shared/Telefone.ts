@@ -74,28 +74,29 @@ export default class Telefone {
 
   private constructor(valor?: string) {
     this.valor = valor?.replace(/\D/g, "") ?? "";
-    if (!Telefone.isValido(this.valor))
-      throw new Error(Erros.TELEFONE_INVALIDO);
+    if (!Telefone.isValido(this.valor)) throw new Error(Erros.TELEFONE_INVALIDO);
   }
 
   static create(valor: string): Telefone {
     return new Telefone(valor);
   }
 
-  // get DDD() {}
+  get DDD() {
+    return this.valor.slice(0, 2);
+  }
 
-  // get numeroFormatado(){}
+  get numeroFormatado() {
+    return this.valor.replace(/^(\d{2})(\d{4,5})(\d{4})$/, "$1 $2-$3");
+  }
 
   private static isValido(valor: string): boolean {
     if (!valor) return false;
     const numeros = valor.replace(/\D/g, "").split("");
-    if ((numeros.length !== 10 && numeros.length !== 11) || numeros[0] === "0")
-      return false;
+    if ((numeros.length !== 10 && numeros.length !== 11) || numeros[0] === "0") return false;
     const ddd = numeros.slice(0, 2).join("");
     if (!Telefone.DDDS.includes(ddd)) return false;
     const numero = numeros.slice(2).join("");
-    if (numero.length === 8 && numero[0]! >= "2" && numero[0]! <= "5")
-      return true;
+    if (numero.length === 8 && numero[0]! >= "2" && numero[0]! <= "5") return true;
     if (numero.length === 9 && numero[0]! === "9") return true;
     return false;
   }
