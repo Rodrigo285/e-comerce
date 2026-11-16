@@ -9,23 +9,34 @@ export default class NomeCliente {
       throw new Error(Erros.NOME_INVALIDO);
     }
 
+    const nomeFormatado = NomeCliente.capitalizarTexto(valor);
+
     const erros = Validador.combinar(
-      Validador.naoNulo(valor, Erros.NOME_INVALIDO),
-      Validador.naoVazio(valor, Erros.NOME_INVALIDO),
-      Validador.tamanhoMenorQue(valor, 60, Erros.NOME_MUITO_GRANDE),
-      Validador.tamanhoMaiorQue(valor, 3, Erros.NOME_MUITO_PEQUENO),
-      Validador.regex(valor, NomeCliente.REGEX, Erros.NOME_INVALIDO),
+      Validador.naoNulo(nomeFormatado, Erros.NOME_INVALIDO),
+      Validador.naoVazio(nomeFormatado, Erros.NOME_INVALIDO),
+      Validador.tamanhoMenorQue(nomeFormatado, 60, Erros.NOME_MUITO_GRANDE),
+      Validador.tamanhoMaiorQue(nomeFormatado, 3, Erros.NOME_MUITO_PEQUENO),
+      Validador.regex(nomeFormatado, NomeCliente.REGEX, Erros.NOME_INVALIDO),
     );
 
     if (erros) throw new Error(erros.join(","));
-
-    const nome = valor.trim();
-    const nomeFormatado = nome.replace(/\s+/g, " ");
 
     this.valor = nomeFormatado;
   }
 
   static create(valor: string | null | undefined): NomeCliente {
     return new NomeCliente(valor);
+  }
+
+  private static capitalizarTexto(valor: string): string {
+    const valorNormalizado = valor.trim().replace(/\s+/g, " ");
+    if (valorNormalizado !== "") {
+      const valorCapitalizado = valorNormalizado.split(" ");
+      const palavrasCapitalizada = valorCapitalizado.map((palavra) => {
+        return palavra[0]?.toUpperCase() + palavra.slice(1).toLowerCase();
+      });
+      return palavrasCapitalizada.join(" ");
+    }
+    return "";
   }
 }

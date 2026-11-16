@@ -45,9 +45,7 @@ describe("NomeCliente", () => {
   });
 
   test("Deve lancar erro ao tentar criar nome muito grande", () => {
-    expect(() => NomeCliente.create("A".repeat(61))).toThrow(
-      Erros.NOME_MUITO_GRANDE,
-    );
+    expect(() => NomeCliente.create("A".repeat(61))).toThrow(Erros.NOME_MUITO_GRANDE);
   });
 
   test("Deve lançar erro ao tentar criar um nome vazio", () => {
@@ -63,5 +61,11 @@ describe("NomeCliente", () => {
   test("Deve aceitar nomes com acentuaçao", () => {
     const nome = NomeCliente.create("D'Ávila");
     expect(nome.valor).toBe("D'Ávila");
+  });
+
+  test("Deve criar um nome capitalizado", () => {
+    const nome = NomeCliente.create("rodrigo de souza borges");
+    console.log(nome);
+    expect(nome.valor).toBe("Rodrigo De Souza Borges");
   });
 });
