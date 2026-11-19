@@ -28,7 +28,7 @@ describe("NomeCliente", () => {
   });
 
   test("Deve aceitar nome com exatamente 60 caracteres", () => {
-    const valor = "R".repeat(60);
+    const valor = "Rodrigo Borges".padEnd(60, "a");
     const nome = NomeCliente.create(valor);
     expect(nome.valor).toBe(valor);
   });
@@ -45,7 +45,9 @@ describe("NomeCliente", () => {
   });
 
   test("Deve lancar erro ao tentar criar nome muito grande", () => {
-    expect(() => NomeCliente.create("A".repeat(61))).toThrow(Erros.NOME_MUITO_GRANDE);
+    expect(() => NomeCliente.create("A".repeat(61))).toThrow(
+      Erros.NOME_MUITO_GRANDE,
+    );
   });
 
   test("Deve lançar erro ao tentar criar um nome vazio", () => {
@@ -67,5 +69,11 @@ describe("NomeCliente", () => {
     const nome = NomeCliente.create("rodrigo de souza borges");
     console.log(nome);
     expect(nome.valor).toBe("Rodrigo De Souza Borges");
+  });
+
+  it("Deve capitalizar nomes separados por hífen", () => {
+    const nome = NomeCliente.create("joão-paulo");
+
+    expect(nome.valor).toBe("João-Paulo");
   });
 });

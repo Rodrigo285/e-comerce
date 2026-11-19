@@ -33,7 +33,22 @@ export default class NomeCliente {
     if (valorNormalizado !== "") {
       const valorCapitalizado = valorNormalizado.split(" ");
       const palavrasCapitalizada = valorCapitalizado.map((palavra) => {
-        return palavra[0]?.toUpperCase() + palavra.slice(1).toLowerCase();
+        const palavra1 =
+          palavra[0]?.toUpperCase()! + palavra.slice(1).toLowerCase();
+        const posicaoApostrofo = palavra1.indexOf("'");
+        const posicaoInfen = palavra1.indexOf("-");
+
+        if (posicaoInfen !== -1 || posicaoApostrofo !== -1) {
+          const posicaoLetra = posicaoInfen + 1 || posicaoApostrofo + 1;
+
+          const nomeCompleto =
+            palavra1.slice(0, posicaoLetra) +
+            palavra1[posicaoLetra]?.toUpperCase() +
+            palavra1.slice(posicaoLetra + 1);
+
+          return nomeCompleto;
+        }
+        return palavra1;
       });
       return palavrasCapitalizada.join(" ");
     }
