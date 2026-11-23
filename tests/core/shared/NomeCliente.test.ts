@@ -67,7 +67,6 @@ describe("NomeCliente", () => {
 
   test("Deve criar um nome capitalizado", () => {
     const nome = NomeCliente.create("rodrigo de souza borges");
-    console.log(nome);
     expect(nome.valor).toBe("Rodrigo De Souza Borges");
   });
 
